@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
+import SubmitTransaction from "../components/submitTransect";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -55,6 +56,13 @@ export default function Profile() {
       handleSaveAttribute();
     }
   };
+
+  const jsonData = {
+    name: "Test Data",
+    timestamp: new Date().toISOString()
+  };
+
+  const isConnected = true; // Bunu WalletConnect'ten alacaksınız
 
   return (
     <div className="p-8 pb-20 gap-16 sm:p-20">
@@ -132,6 +140,11 @@ export default function Profile() {
             ))}
           </ul>
 
+          <SubmitTransaction
+        jsonData={jsonData}
+        isConnected={isConnected}
+      />
+
           {/* Yeni Key-Value Çifti Ekleme Bölümü */}
           <div className="mt-4">
             {isAdding ? (
@@ -161,6 +174,7 @@ export default function Profile() {
                 +
               </button>
             )}
+                  
           </div>
         </div>
       </div>
