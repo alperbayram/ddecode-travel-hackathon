@@ -2,6 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 declare global {
     interface Window {
@@ -17,6 +18,10 @@ export default function WalletConnect() {
 
     useEffect(() => {
         setIsClient(true);
+        const savedAddress = Cookies.get('walletAddress');
+        if (savedAddress) {
+            setAddress(savedAddress);
+        }
     }, []);
 
     const CAMINO_CHAIN_ID = '0x1F5'; // 501 in hexadecimal
@@ -68,9 +73,11 @@ export default function WalletConnect() {
             }
 
             setAddress(accounts[0]);
+            Cookies.set('walletAddress', accounts[0], { expires: 7 }); // Address'i çerezlere kaydediyoruz
 
             window.ethereum.on('accountsChanged', (newAccounts: string[]) => {
                 setAddress(newAccounts[0]);
+                Cookies.set('walletAddress', newAccounts[0], { expires: 7 }); // Yeni adresi çerezlere kaydediyoruz
             });
 
             window.ethereum.on('chainChanged', () => {
