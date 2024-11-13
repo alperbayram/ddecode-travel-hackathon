@@ -29,26 +29,26 @@ export default function Navbar() {
   const connectWallet = async () => {
     if (!walletId) {
       try {
-        // MetaMask üzerinden bağlanma işlemi
+        // Connect to MetaMask
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
         const walletAddress = accounts[0];
         setWalletId(walletAddress);
-        Cookies.set("walletAddress", walletAddress, { expires: 7 }); // Wallet ID'yi çereze kaydet
-
-        // Bağlantı işlemi tamamlandıktan sonra sayfayı yenile
-        window.location.reload();
+        Cookies.set("walletAddress", walletAddress, { expires: 7 }); // Save Wallet ID in cookies
+  
+        // Redirect to profile page after connecting
+        window.location.href = "/profile";
       } catch (error) {
         console.error("Wallet connection failed:", error);
       }
     } else {
-      // Çıkış işlemi: Wallet ID'yi sıfırla ve çerezden kaldır
+      // Disconnect: Clear Wallet ID and remove from cookies
       setWalletId("");
       Cookies.remove("walletAddress");
-
-      // Çıkış işlemi tamamlandıktan sonra sayfayı yenile
-      window.location.reload();
+  
+      // Redirect to home page after disconnecting
+      window.location.href = "/";
     }
   };
 

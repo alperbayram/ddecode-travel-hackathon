@@ -130,90 +130,96 @@ const CONTRACT_ABI = [
 ]
 
 interface SubmitTransactionProps {
-  jsonData: any; // JSON verisi prop olarak gelecek
-  isConnected: boolean;
+	jsonData: any; // JSON verisi prop olarak gelecek
+	isConnected: boolean;
+	onTransactionComplete: () => void; // Callback for notifying transaction completion
 }
 
+
 const SubmitTransaction: React.FC<SubmitTransactionProps> = ({ 
-  jsonData,
-  isConnected 
-}) => {
-  const [status, setStatus] = useState<string>('');
-  const [isLoading, setIsLoading] = useState(false);
+	jsonData,
+	isConnected,
+	onTransactionComplete 
+  }) => {
+	const [status, setStatus] = useState<string>('');
+	const [isLoading, setIsLoading] = useState(false);
+	
+	const store = async () => {
+	  try {
+		if (!window.ethereum || !isConnected) {
+		  setStatus('Please connect your wallet first');
+		  return;
+		}
   
-  const store = async () => {
-    try {
-      if (!window.ethereum || !isConnected) {
-        setStatus('Please connect your wallet first');
-        return;
-      }
+		setIsLoading(true);
+		setStatus('Processing...');
+  
+		// JSON verisini string'e çevir
+		const jsonString = JSON.stringify(jsonData);
+		
+		// SHA256 hash'ini al
+		const hash = SHA256(jsonString).toString();
+  
+		// Provider ve signer'ı al
+		const provider = new ethers.BrowserProvider(window.ethereum);
+		const signer = await provider.getSigner();
+		
+		// Kontrat instance'ını oluştur
+		const contract = new ethers.Contract(
+		  CONTRACT_ADDRESS,
+		  CONTRACT_ABI,
+		  signer
+		);
+  
+		// Kontrat fonksiyonunu çağır
+		const tx = await contract.storeHash(hash);
+		
+		setStatus('Waiting for confirmation...');
+		
+		// Transaction'ın tamamlanmasını bekle
+		const receipt = await tx.wait();
+  
+		setStatus(`Success! Transaction: ${receipt.hash}`);
+  
+		// Trigger onTransactionComplete callback to notify parent
+		onTransactionComplete();
+  
+	  } catch (error) {
+		console.error('Transaction error:', error);
+		setStatus(error instanceof Error ? error.message : "Transaction failed");
+	  } finally {
+		setIsLoading(false);
+	  }
+	};
 
-      setIsLoading(true);
-      setStatus('Processing...');
-
-      // JSON verisini string'e çevir
-      const jsonString = JSON.stringify(jsonData);
-      
-      // SHA256 hash'ini al
-      const hash = SHA256(jsonString).toString();
-
-      // Provider ve signer'ı al
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      
-      // Kontrat instance'ını oluştur
-      const contract = new ethers.Contract(
-        CONTRACT_ADDRESS,
-        CONTRACT_ABI,
-        signer
-      );
-
-      // Kontrat fonksiyonunu çağır
-      const tx = await contract.storeHash(hash);
-      
-      setStatus('Waiting for confirmation...');
-      
-      // Transaction'ın tamamlanmasını bekle
-      const receipt = await tx.wait();
-
-      setStatus(`Success! Transaction: ${receipt.hash}`);
-
-    } catch (error) {
-      console.error('Transaction error:', error);
-      setStatus(error instanceof Error ? error.message : "Transaction failed");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  return (
-    <div>
-      <button 
-        onClick={store}
-        disabled={!isConnected || !jsonData || isLoading}
-        style={{
-          padding: '10px 20px',
-          backgroundColor: isLoading ? '#cccccc' : '#007bff',
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: isLoading ? 'not-allowed' : 'pointer',
-          width: '200px'
-        }}
-      >
-        {isLoading ? 'Processing...' : 'Store Hash in Blockchain'}
-      </button>
-      
-      {status && (
-        <div style={{ 
-          marginTop: '10px',
-          color: status.includes('Error') || status.includes('failed') ? 'red' : 'green' 
-        }}>
-          {status}
-        </div>
-      )}
-    </div>
-  );
-};
+	return (
+		<div>
+		  <button 
+			onClick={store}
+			disabled={!isConnected || !jsonData || isLoading}
+			style={{
+			  padding: '10px 20px',
+			  backgroundColor: isLoading ? '#cccccc' : '#007bff',
+			  color: 'white',
+			  border: 'none',
+			  borderRadius: '4px',
+			  cursor: isLoading ? 'not-allowed' : 'pointer',
+			  width: '200px'
+			}}
+		  >
+			{isLoading ? 'Processing...' : 'Store Hash in Blockchain'}
+		  </button>
+		  
+		  {status && (
+			<div style={{ 
+			  marginTop: '10px',
+			  color: status.includes('Error') || status.includes('failed') ? 'red' : 'green' 
+			}}>
+			  {status}
+			</div>
+		  )}
+		</div>
+	  );
+	};
 
 export default SubmitTransaction;
