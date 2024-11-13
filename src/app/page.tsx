@@ -1,14 +1,12 @@
 "use client"; // Bu satırı ekleyin
 
-import Image from "next/image";
-import WalletConnect from "./components/WalletConnect";
 import Cookies from "js-cookie";
 import { useState, useEffect } from "react";
 import SectionComponent from "./components/section/section";
 import SectionTwoComponent from "./components/sectiontwo/sectiontwo";
 
 export default function Home() {
-  const [walletId, setWalletId] = useState("");
+  const [walletId, setWalletId] = useState<string>("");
 
   useEffect(() => {
     // Çerezden walletAddress değerini alçdmdddfukfboıbobkufku
@@ -20,7 +18,6 @@ export default function Home() {
 
   return (
     <div className="gap-16 font-[family-name:var(--font-geist-sans)]">
-      {/* <WalletConnect /> */}
       <SectionTwoComponent />
       <div className="">
         <SectionComponent />

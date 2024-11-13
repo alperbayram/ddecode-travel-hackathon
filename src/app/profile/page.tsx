@@ -4,16 +4,21 @@ import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import SubmitTransaction from "../components/submitTransect";
 
-function classNames(...classes) {
+function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
+interface IResponse {
+  key: string | number;
+  value: string | number;
+}
+
 export default function Profile() {
-  const [walletId, setWalletId] = useState("");
-  const [attributes, setAttributes] = useState([]); // Kaydedilen key-value çiftleri
-  const [isAdding, setIsAdding] = useState(false); // Yeni key-value ekleme modunu kontrol eder
-  const [newKey, setNewKey] = useState(""); // Yeni key (anahtar) için input
-  const [newValue, setNewValue] = useState(""); // Yeni value (değer) için input
+  const [walletId, setWalletId] = useState<string>("");
+  const [attributes, setAttributes] = useState<IResponse[]>([]); // Kaydedilen key-value çiftleri
+  const [isAdding, setIsAdding] = useState<boolean>(false); // Yeni key-value ekleme modunu kontrol eder
+  const [newKey, setNewKey] = useState<string>(""); // Yeni key (anahtar) için input
+  const [newValue, setNewValue] = useState<string>(""); // Yeni value (değer) için input
 
   useEffect(() => {
     // Çerezden walletId ve kaydedilmiş key-value çiftlerini al
@@ -35,23 +40,30 @@ export default function Profile() {
 
   const handleSaveAttribute = () => {
     if (newKey.trim() !== "" && newValue.trim() !== "") {
-      const updatedAttributes = [...attributes, { key: newKey, value: newValue }];
+      const updatedAttributes = [
+        ...attributes,
+        { key: newKey, value: newValue },
+      ];
       setAttributes(updatedAttributes); // Yeni key-value çiftini kaydeder
-      Cookies.set("attributes", JSON.stringify(updatedAttributes), { expires: 7 }); // Çereze kaydet
+      Cookies.set("attributes", JSON.stringify(updatedAttributes), {
+        expires: 7,
+      }); // Çereze kaydet
       setNewKey(""); // Key alanını temizler
       setNewValue(""); // Value alanını temizler
       setIsAdding(false); // Ekleme modunu kapatır
     }
   };
 
-  const handleDeleteAttribute = (index) => {
+  const handleDeleteAttribute = (index: any) => {
     const updatedAttributes = attributes.filter((_, i) => i !== index); // Belirtilen index'teki öğeyi sil
     setAttributes(updatedAttributes);
-    Cookies.set("attributes", JSON.stringify(updatedAttributes), { expires: 7 }); // Çereze güncellenmiş haliyle kaydet
+    Cookies.set("attributes", JSON.stringify(updatedAttributes), {
+      expires: 7,
+    }); // Çereze güncellenmiş haliyle kaydet
   };
 
   // Enter tuşuna basıldığında kayıt işlemi gerçekleştirilir
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: any) => {
     if (e.key === "Enter") {
       handleSaveAttribute();
     }
@@ -121,7 +133,7 @@ export default function Profile() {
               Get started today
             </a>
           </div>
-        </div>  
+        </div>
 
         {/* Key-Value Çiftleri Bölümü */}
         <div className="mt-10">
