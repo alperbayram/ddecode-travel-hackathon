@@ -1,7 +1,21 @@
+"use client";  // Bu satırı ekleyin
+
 import Image from "next/image";
 import WalletConnect from "./components/WalletConnect";
+import Cookies from "js-cookie";
+import { useState, useEffect } from "react";
 
 export default function Home() {
+  const [walletId, setWalletId] = useState("");
+
+  useEffect(() => {
+    // Çerezden walletAddress değerini al
+    const savedWalletId = Cookies.get("walletAddress");
+    if (savedWalletId) {
+      setWalletId(savedWalletId);
+    }
+  }, []);
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] gradient-bg-welcome">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -23,7 +37,16 @@ export default function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
-        <WalletConnect></WalletConnect>
+        
+        <WalletConnect />
+
+        {/* Wallet ID Gösterimi */}
+        {walletId ? (
+          <p>Connected Wallet ID: {walletId.slice(0, 6)}...{walletId.slice(-4)}</p>
+        ) : (
+          <p>No Wallet Connected</p>
+        )}
+
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
             className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
