@@ -28,40 +28,39 @@ export default function Profile() {
             "rounded-3xl p-8 ring-1 ring-gray-900/10 sm:p-10"
           )}
         >
-            <h3
-              className={classNames(
-                "text-indigo-600",
-                "text-base/7 font-semibold"
-              )}
-            >
-              test
-            </h3>
-            <p className="mt-4 flex items-baseline gap-x-2">
-              <span
-                className={classNames(
-                  "text-gray-900",
-                  "text-sm font-semibold tracking-tight" // Font boyutunu burada küçültüyoruz
-                )}
-              >
-                {walletId ? walletId : "Wallet ID"}
-              </span>
-              <span className={classNames("text-gray-500", "text-base")}>
-                /month
-              </span>
-            </p>
-            <p className={classNames("text-gray-600", "mt-6 text-base/7")}>
-              description
-            </p>
-            <a
+          <h3
+            className={classNames(
+              "text-indigo-600",
+              "text-base/7 font-semibold"
+            )}
+          >
+            test
+          </h3>
+          <p className="mt-4 flex items-baseline gap-x-2">
+            <span
               className={classNames(
                 "text-gray-900",
-                "text-5xl font-semibold tracking-tight"
+                "text-sm font-semibold tracking-tight" // Font boyutunu burada küçültüyoruz
               )}
             >
-              Get started today
-            </a>
-          </div>
-        </div>  
+              {walletId ? walletId : "Wallet ID"}
+            </span>
+            <span className={classNames("text-gray-500", "text-base")}>
+              /month
+            </span>
+          </p>
+          <p className={classNames("text-gray-600", "mt-6 text-base/7")}>
+            description
+          </p>
+          <a
+            className={classNames(
+              "text-gray-900",
+              "text-5xl font-semibold tracking-tight"
+            )}
+          >
+            Get started today
+          </a>
+        </div>
       </div>
     </div>
   );
