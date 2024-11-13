@@ -6,10 +6,9 @@ import { Disclosure, DisclosureButton } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const navigation = [
-  { name: "Home", href: "#", current: false },
-  { name: "About", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Team", href: "#", current: false },
+  { name: "Home", href: "/", current: false },
+  { name: "About", href: "/about", current: false },
+  { name: "Team", href: "/team", current: false },
 ];
 
 function classNames(...classes) {
@@ -31,11 +30,13 @@ export default function Navbar() {
     if (!walletId) {
       try {
         // MetaMask üzerinden bağlanma işlemi
-        const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+        const accounts = await window.ethereum.request({
+          method: "eth_requestAccounts",
+        });
         const walletAddress = accounts[0];
         setWalletId(walletAddress);
         Cookies.set("walletAddress", walletAddress, { expires: 7 }); // Wallet ID'yi çereze kaydet
-  
+
         // Bağlantı işlemi tamamlandıktan sonra sayfayı yenile
         window.location.reload();
       } catch (error) {
@@ -45,7 +46,7 @@ export default function Navbar() {
       // Çıkış işlemi: Wallet ID'yi sıfırla ve çerezden kaldır
       setWalletId("");
       Cookies.remove("walletAddress");
-  
+
       // Çıkış işlemi tamamlandıktan sonra sayfayı yenile
       window.location.reload();
     }
@@ -60,8 +61,14 @@ export default function Navbar() {
             <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
               <span className="absolute -inset-0.5" />
               <span className="sr-only">Open main menu</span>
-              <Bars3Icon aria-hidden="true" className="block size-6 group-data-[open]:hidden" />
-              <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-[open]:block" />
+              <Bars3Icon
+                aria-hidden="true"
+                className="block size-6 group-data-[open]:hidden"
+              />
+              <XMarkIcon
+                aria-hidden="true"
+                className="hidden size-6 group-data-[open]:block"
+              />
             </DisclosureButton>
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
@@ -85,7 +92,18 @@ export default function Navbar() {
               </div>
             </div>
           </div>
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+          <div className="absolute inset-y-0 right-0 flex items-center space-x-2 pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            {walletId ? (
+              <a
+                type="button"
+                href="/profile"
+                className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Profile
+              </a>
+            ) : (
+              ""
+            )}
             <button
               type="button"
               onClick={connectWallet}
