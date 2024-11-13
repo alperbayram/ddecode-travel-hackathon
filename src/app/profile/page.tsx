@@ -1,4 +1,4 @@
-"use client"; // Bu satırı ekleyin
+"use client"; // Mark as a client component
 
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
@@ -15,28 +15,28 @@ interface IResponse {
 
 export default function Profile() {
   const [walletId, setWalletId] = useState<string>("");
-  const [attributes, setAttributes] = useState<IResponse[]>([]); // Kaydedilen key-value çiftleri
-  const [isAdding, setIsAdding] = useState<boolean>(false); // Yeni key-value ekleme modunu kontrol eder
-  const [newKey, setNewKey] = useState<string>(""); // Yeni key (anahtar) için input
-  const [newValue, setNewValue] = useState<string>(""); // Yeni value (değer) için input
+  const [attributes, setAttributes] = useState<IResponse[]>([]); // Saved key-value pairs
+  const [savedAttributes, setSavedAttributes] = useState<IResponse[]>([]); // Saved attributes for the blockchain
+  const [newKey, setNewKey] = useState<string>(""); // Input for new key
+  const [newValue, setNewValue] = useState<string>(""); // Input for new value
 
   useEffect(() => {
-    // Çerezden walletId ve kaydedilmiş key-value çiftlerini al
+    // Load walletId and saved key-value pairs from cookies
     const savedWalletId = Cookies.get("walletAddress");
     if (savedWalletId) {
       setWalletId(savedWalletId);
     }
 
-    // Çerezdeki tüm key-value çiftlerini yükle
     const savedAttributes = Cookies.get("attributes");
     if (savedAttributes) {
       setAttributes(JSON.parse(savedAttributes));
     }
-  }, []);
 
-  const handleAddAttribute = () => {
-    setIsAdding(true); // Yeni key-value ekleme modunu açar
-  };
+    const loadedSavedAttributes = Cookies.get("savedAttributes");
+    if (loadedSavedAttributes) {
+      setSavedAttributes(JSON.parse(loadedSavedAttributes));
+    }
+  }, []);
 
   const handleSaveAttribute = () => {
     if (newKey.trim() !== "" && newValue.trim() !== "") {
@@ -44,25 +44,30 @@ export default function Profile() {
         ...attributes,
         { key: newKey, value: newValue },
       ];
-      setAttributes(updatedAttributes); // Yeni key-value çiftini kaydeder
+      setAttributes(updatedAttributes);
       Cookies.set("attributes", JSON.stringify(updatedAttributes), {
         expires: 7,
-      }); // Çereze kaydet
-      setNewKey(""); // Key alanını temizler
-      setNewValue(""); // Value alanını temizler
-      setIsAdding(false); // Ekleme modunu kapatır
+      }); // Save to cookies
+      setNewKey("");
+      setNewValue("");
     }
   };
 
   const handleDeleteAttribute = (index: any) => {
-    const updatedAttributes = attributes.filter((_, i) => i !== index); // Belirtilen index'teki öğeyi sil
+    const updatedAttributes = attributes.filter((_, i) => i !== index);
     setAttributes(updatedAttributes);
     Cookies.set("attributes", JSON.stringify(updatedAttributes), {
       expires: 7,
-    }); // Çereze güncellenmiş haliyle kaydet
+    }); // Save the updated list to cookies
   };
 
-  // Enter tuşuna basıldığında kayıt işlemi gerçekleştirilir
+  const handleTransactionComplete = () => {
+    setSavedAttributes(attributes);
+    Cookies.set("savedAttributes", JSON.stringify(attributes), { expires: 7 });
+    setAttributes([]); // Clear attributes after storing in saved attributes
+    Cookies.remove("attributes"); // Remove the unsaved attributes from cookies
+  };
+
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter") {
       handleSaveAttribute();
@@ -74,7 +79,7 @@ export default function Profile() {
     timestamp: new Date().toISOString()
   };
 
-  const isConnected = true; // Bunu WalletConnect'ten alacaksınız
+  const isConnected = true; // This would come from WalletConnect
 
   return (
     <div className="p-8 pb-20 gap-16 sm:p-20">
@@ -112,7 +117,7 @@ export default function Profile() {
               <span
                 className={classNames(
                   "text-gray-900",
-                  "text-sm font-semibold tracking-tight" // Font boyutunu burada küçültüyoruz
+                  "text-sm font-semibold tracking-tight"
                 )}
               >
                 {walletId ? walletId : "Wallet ID"}
@@ -135,7 +140,7 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* Key-Value Çiftleri Bölümü */}
+        {/* Key-Value Attributes Section */}
         <div className="mt-10">
           <h2 className="text-lg font-semibold text-gray-700">Attributes:</h2>
           <ul className="list-disc pl-5 mt-2">
@@ -152,41 +157,42 @@ export default function Profile() {
             ))}
           </ul>
 
-          <SubmitTransaction
-        jsonData={jsonData}
-        isConnected={isConnected}
-      />
+          {/* Input fields directly visible */}
+          <div className="mt-4 mb-4 flex items-center gap-2">
+            <input
+              type="text"
+              value={newKey}
+              onChange={(e) => setNewKey(e.target.value)}
+              placeholder="Key"
+              onKeyDown={handleKeyDown}
+              className="border rounded-md p-2 w-1/4"
+            />
+            <input
+              type="text"
+              value={newValue}
+              onChange={(e) => setNewValue(e.target.value)}
+              placeholder="Value"
+              onKeyDown={handleKeyDown}
+              className="border rounded-md p-2 w-1/2"
+            />
+          </div>
 
-          {/* Yeni Key-Value Çifti Ekleme Bölümü */}
-          <div className="mt-4">
-            {isAdding ? (
-              <div className="flex items-center gap-2">
-                <input
-                  type="text"
-                  value={newKey}
-                  onChange={(e) => setNewKey(e.target.value)}
-                  placeholder="Key"
-                  onKeyDown={handleKeyDown} // Enter tuşuna basıldığında kayıt işlemi
-                  className="border rounded-md p-2 w-1/4"
-                />
-                <input
-                  type="text"
-                  value={newValue}
-                  onChange={(e) => setNewValue(e.target.value)}
-                  placeholder="Value"
-                  onKeyDown={handleKeyDown} // Enter tuşuna basıldığında kayıt işlemi
-                  className="border rounded-md p-2 w-1/2"
-                />
-              </div>
-            ) : (
-              <button
-                onClick={handleAddAttribute}
-                className="text-blue-500 text-2xl font-bold"
-              >
-                +
-              </button>
-            )}
-                  
+          <SubmitTransaction
+            jsonData={jsonData}
+            isConnected={isConnected}
+            onTransactionComplete={handleTransactionComplete}
+          />
+
+          {/* Saved Attributes Section */}
+          <div className="mt-8">
+            <h2 className="text-lg font-semibold text-gray-700">Saved Attributes:</h2>
+            <ul className="list-disc pl-5 mt-2">
+              {savedAttributes.map((attribute, index) => (
+                <li key={index} className="text-gray-800">
+                  <strong>{attribute.key}:</strong> {attribute.value}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
