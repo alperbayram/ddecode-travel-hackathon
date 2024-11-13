@@ -39,7 +39,7 @@ export default function SectionComponent() {
           Deploy faster
         </h2>
         <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl lg:text-balance">
-          Everything you need to deploy your app
+          Everything you need to deploy your app.
         </p>
         <p className="mt-6 text-lg/8 text-gray-600">
           Quis tellus eget adipiscing convallis sit sit eget aliquet quis.
