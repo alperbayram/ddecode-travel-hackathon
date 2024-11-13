@@ -17,7 +17,7 @@ export default function SectionTwoComponent() {
             Data to enrich your online business
           </h1>
           <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
-            Ajjjjnim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
+            Ajjjjşmsvosfopvnim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
             lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
