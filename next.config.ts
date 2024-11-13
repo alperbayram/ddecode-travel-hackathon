@@ -1,7 +1,20 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  webpack: (config) => {
+    let modularizeImports = null;
+    config.module.rules.some((rule) =>
+      rule.oneOf?.some((oneOf) => {
+        modularizeImports = oneOf?.use?.options?.nextConfig?.modularizeImports;
+        return modularizeImports;
+      })
+    );
+    if (modularizeImports?.["@headlessui/react"]) {
+      delete modularizeImports["@headlessui/react"];
+    }
+    return config;
+  },
+  /* diğer yapılandırma seçenekleri */
 };
 
 export default nextConfig;
