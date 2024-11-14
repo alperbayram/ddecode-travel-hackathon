@@ -4,6 +4,7 @@ import { useState, useEffect, Fragment } from "react";
 import Cookies from "js-cookie";
 import SubmitTransaction from "../components/submitTransect";
 import { Dialog, Transition } from "@headlessui/react";
+import { QRCodeSVG } from "qrcode.react";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -22,26 +23,15 @@ export default function Profile() {
   const [newValue, setNewValue] = useState<string>(""); 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedAttributes, setSelectedAttributes] = useState<any[]>([]);
-  const [hash, setHash] = useState<string>(""); // Initialize hash as an empty string
-
+  const [hash, setHash] = useState<string>(""); 
+  const [qrData, setQrData] = useState<string>("");
+  const [qrCodeData, setQrCodeData] = useState<string | null>(null);
   // Predefined options for the "key" field
   const keyOptions = [
-    "Name", 
-    "Age", 
-    "Email", 
-    "Address", 
-    "Phone", 
-    "Hobbies", 
-    "Favorite Food", 
-    "Occupation", 
-    "Country", 
-    "City", 
-    "Language", 
-    "Skills", 
-    "Education", 
-    "Interests", 
-    "Favorite Color", 
-    "Birthday"
+    "Name", "Age", "Email", "Address", "Phone", 
+    "Hobbies", "Favorite Food", "Occupation", "Country", 
+    "City", "Language", "Skills", "Education", "Interests", 
+    "Favorite Color", "Birthday"
   ];
 
   const [filteredOptions, setFilteredOptions] = useState<string[]>(keyOptions);
@@ -112,7 +102,6 @@ export default function Profile() {
     }
   };
 
-  // Combine attributes and savedAttributes into jsonData with string conversion
   const jsonData = {
     attributes: [...attributes, ...savedAttributes].reduce((acc, { key, value }) => {
       acc[String(key)] = String(value);
@@ -128,7 +117,7 @@ export default function Profile() {
     }, {} as Record<string, string>);
     return JSON.stringify({
       walletAddress: walletId,
-      hash,
+      hash, // include the hash data here
       selectedAttributes: selectedData,
     });
   };
@@ -145,12 +134,16 @@ export default function Profile() {
     const value = e.target.value;
     setNewKey(value);
 
-    // Filter options based on the input value
     setFilteredOptions(
       keyOptions.filter(option =>
         option.toLowerCase().includes(value.toLowerCase())
       )
     );
+  };
+
+  const handleGenerateQR = () => {
+    const qrData = generateQRCodeData();
+    setQrCodeData(qrData); // Store the generated QR data
   };
 
   const isConnected = true;
@@ -166,14 +159,7 @@ export default function Profile() {
             "rounded-3xl p-8 ring-1 ring-gray-900/10 sm:p-10"
           )}
         >
-          <h3
-            className={classNames(
-              "text-[#9333ea] ",
-              "text-base/7 font-semibold"
-            )}
-          >
-            Wallet
-          </h3>
+          <h3 className={classNames("text-[#9333ea]", "text-base/7 font-semibold")}>Wallet</h3>
           <p className="mt-4 flex items-baseline gap-x-2">
             <span className="text-gray-900 text-sm font-semibold tracking-tight">
               {walletId ? walletId : "Wallet ID"}
@@ -189,7 +175,7 @@ export default function Profile() {
           <button
             onClick={() => setIsModalOpen(true)}
             className={classNames(
-              "text-[#9333ea]  ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline-[#9333ea]  w-full",
+              "text-[#9333ea] ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline-[#9333ea] w-full",
               "mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-10"
             )}
           >
@@ -203,7 +189,6 @@ export default function Profile() {
         <div className="mb-6">
           <h2 className="text-lg font-semibold text-gray-700">Add Attribute:</h2>
           <div className="mt-4 mb-4 flex items-center gap-2">
-            {/* Replace input with select for key options */}
             <input
               type="text"
               value={newKey}
@@ -228,7 +213,7 @@ export default function Profile() {
             />
             <button
               onClick={handleSaveAttribute}
-              className="bg-[#9333ea]  text-white rounded-md px-4 py-4 font-semibold"
+              className="bg-[#9333ea] text-white rounded-md px-4 py-4 font-semibold"
             >
               Add
             </button>
@@ -286,6 +271,13 @@ export default function Profile() {
             )}
           </div>
         </div>
+
+        {/* QR Code Display */}
+        {qrData && (
+          <div className="mt-8 flex justify-center">
+            <QRCodeSVG value={generateQRCodeData()} size={128} />
+          </div>
+        )}
       </div>
 
       {/* QR Code Modal */}
@@ -300,6 +292,8 @@ export default function Profile() {
               <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">Generate QR Code</Dialog.Title>
+
+                  {/* Selection of saved attributes */}
                   <div className="mt-4">
                     <p className="text-sm text-gray-500">Select attributes to include in the QR code:</p>
                     <div className="mt-4 space-y-2">
@@ -309,7 +303,7 @@ export default function Profile() {
                             type="checkbox"
                             checked={selectedAttributes.includes(attribute)}
                             onChange={() => handleToggleAttribute(attribute)}
-                            className="h-4 w-4 text-[#9333ea]  border-gray-300 rounded"
+                            className="h-4 w-4 text-[#9333ea] border-gray-300 rounded"
                           />
                           <label className="ml-2 text-gray-700">
                             {attribute.key}: {attribute.value}
@@ -319,19 +313,30 @@ export default function Profile() {
                     </div>
                   </div>
 
-                  <div className="mt-6 flex justify-center">
-                    {/* <QRCode value={() => generateQRCodeData()} size={128} /> */}
-                  </div>
-
-                  <div className="mt-4">
+                  {/* Generate QR Code */}
+                  <div className="mt-4 flex justify-between">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-[#9333ea]  px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-[#9333ea] px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
                       onClick={() => setIsModalOpen(false)}
                     >
                       Close
                     </button>
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-[#9333ea] px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+                      onClick={handleGenerateQR}
+                    >
+                      Generate
+                    </button>
                   </div>
+
+                  {/* QR Code Display */}
+                  {qrCodeData && (
+                    <div className="mt-6 flex justify-center">
+                      <QRCodeSVG value={qrCodeData} size={128} />
+                    </div>
+                  )}
                 </Dialog.Panel>
               </Transition.Child>
             </div>
