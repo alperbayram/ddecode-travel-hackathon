@@ -11,7 +11,7 @@ export default function Home() {
   const [walletId, setWalletId] = useState("");
 
   useEffect(() => {
-    // Çerezden walletAddress değerini alçdmdddfukfboıbobkufku
+    // Çerezden walletAddress değerini al
     const savedWalletId = Cookies.get("walletAddress");
     if (savedWalletId) {
       setWalletId(savedWalletId);

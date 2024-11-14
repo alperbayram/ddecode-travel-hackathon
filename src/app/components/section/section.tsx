@@ -36,10 +36,10 @@ export default function SectionComponent() {
     <div className="bg-transparent py-8 sm:py-8 mx-auto max-w-7xl px-6 lg:px-8 h-full">
       <div className="mx-auto max-w-2xl lg:text-center">
         <h2 className="text-base/7 font-semibold text-indigo-600">
-          Deploy faster
+          tiv
         </h2>
         <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl lg:text-balance">
-          Everything you need to deploy your app.
+          How to create a Metamask Wallet for TIV .
         </p>
         <p className="mt-6 text-lg/8 text-gray-600">
           Quis tellus eget adipiscing convallis sit sit eget aliquet quis.
