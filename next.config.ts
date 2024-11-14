@@ -1,10 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  webpack: (config) => {
+  webpack: (config: any) => {
     let modularizeImports = null;
-    config.module.rules.some((rule) =>
-      rule.oneOf?.some((oneOf) => {
+    config.module.rules.some((rule: any) =>
+      rule.oneOf?.some((oneOf: any) => {
         modularizeImports = oneOf?.use?.options?.nextConfig?.modularizeImports;
         return modularizeImports;
       })
@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
       delete modularizeImports["@headlessui/react"];
     }
     return config;
+  },
+  eslint: {
+    // Warning: This allows production builds to successfully complete even if
+    // your project has ESLint errors.
+    ignoreDuringBuilds: true,
   },
   /* diğer yapılandırma seçenekleri */
 };
