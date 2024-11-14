@@ -5,7 +5,7 @@ export default function SectionTwoComponent() {
       <div className="mx-auto max-w-2xl py-8 sm:py-16 lg:py-24">
         <div className="hidden sm:mb-8 sm:flex sm:justify-center">
           <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-            TIV(Travellers identity verification).{" "}
+           Your trusted travel ID.{" "}
             <a href="#" className="font-semibold text-indigo-600">
               <span aria-hidden="true" className="absolute inset-0" />
               Read more <span aria-hidden="true">&rarr;</span>
@@ -14,7 +14,7 @@ export default function SectionTwoComponent() {
         </div>
         <div className="text-center">
           <h1 className="text-balance text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">
-            Your trusted travel ID.
+           TIV(Travellers identity verification)
           </h1>
           <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
            To get started with TIV and enjoy seamless, secure identity verification for your travels,
