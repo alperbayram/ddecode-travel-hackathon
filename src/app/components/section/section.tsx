@@ -35,17 +35,24 @@ export default function SectionComponent() {
   return (
     <div className="bg-transparent py-8 sm:py-8 mx-auto max-w-7xl px-6 lg:px-8 h-full">
       <div className="mx-auto max-w-2xl lg:text-center">
-        <h2 className="text-base/7 font-semibold text-indigo-600">
-          tiv
-        </h2>
+        <h2 className="text-3xl font-semibold text-indigo-600">TIV</h2>
         <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl lg:text-balance">
           How to create a Metamask Wallet for TIV .
         </p>
-        <p className="mt-6 text-lg/8 text-gray-600">
-          Quis tellus eget adipiscing con.
-          
-          
-        </p>
+        <div className="w-full lg:w-full grid grid-cols-3 gap-4 mt-10">
+          <div className="bg-gray-50 p-6 rounded-lg text-center shadow-sm">
+            <h3 className="text-2xl font-semibold text-gray-900">Step 1</h3>
+            <p className="text-gray-600">Download MetaMask</p>
+          </div>
+          <div className="bg-gray-50 p-6 rounded-lg text-center shadow-sm">
+            <h3 className="text-2xl font-semibold text-gray-900">Step 2</h3>
+            <p className="text-gray-600">Create you MetaMask Wallet</p>
+          </div>
+          <div className="bg-gray-50 p-6 rounded-lg text-center shadow-sm">
+            <h3 className="text-2xl font-semibold text-gray-900">Step 3</h3>
+            <p className="text-gray-600">Connect you MetaMask wallet to TIV</p>
+          </div>
+        </div>
       </div>
       <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
         <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">

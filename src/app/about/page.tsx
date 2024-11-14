@@ -8,7 +8,7 @@ export default function About() {
       <div className="bg-white shadow-lg rounded-lg p-8 lg:p-16 flex flex-col lg:flex-row items-start lg:items-center gap-10">
         {/* Left side: Text Content */}
         <div className="w-full lg:w-2/3">
-          <h2 className="text-orange-600 text-lg font-semibold mb-2">
+          <h2 className="text-[#9333ea] text-lg font-semibold mb-2">
             How It Started
           </h2>
           <h1 className="text-gray-900 text-4xl sm:text-5xl font-bold leading-tight mb-6">

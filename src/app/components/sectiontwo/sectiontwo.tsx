@@ -17,9 +17,10 @@ export default function SectionTwoComponent() {
            TIV(Travellers identity verification)
           </h1>
           <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
-           To get started with TIV and enjoy seamless, secure identity verification for your travels,
-           we need you to connect your MetaMask Wallet. Here’s how you can easily create and set up your 
-           MetaMask wallet with us:
+            To get started with TIV and enjoy seamless, secure identity
+            verification for your travels, we need you to connect your MetaMask
+            Wallet. Here’s how you can easily create and set up your MetaMask
+            wallet with us:
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <a
@@ -28,7 +29,7 @@ export default function SectionTwoComponent() {
             >
               Get started
             </a>
-            <a href="#" className="text-sm/6 font-semibold text-gray-900">
+            <a href="/about" className="text-sm/6 font-semibold text-gray-900">
               Learn more <span aria-hidden="true">→</span>
             </a>
           </div>
