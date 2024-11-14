@@ -31,18 +31,26 @@ export default function Navbar() {
   const connectWallet = async () => {
     if (!walletId) {
       try {
+        // Connect to MetaMask
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
         const walletAddress = accounts[0];
         setWalletId(walletAddress);
-        Cookies.set("walletAddress", walletAddress, { expires: 7 });
+        Cookies.set("walletAddress", walletAddress, { expires: 7 }); // Save Wallet ID in cookies
+  
+        // Redirect to profile page after connecting
+        window.location.href = "/profile";
       } catch (error) {
         console.error("Wallet connection failed:", error);
       }
     } else {
+      // Disconnect: Clear Wallet ID and remove from cookies
       setWalletId("");
       Cookies.remove("walletAddress");
+  
+      // Redirect to home page after disconnecting
+      window.location.href = "/";
     }
   };
 
