@@ -3,69 +3,89 @@ import React from "react";
 const teams = [
   {
     name: "Aybars Göktuğ Ayan",
-    title: "Software Developer",
+    title: "Solidity Developer",
+    image:
+      "https://media.licdn.com/dms/image/v2/D4D03AQH3XXjqZzhHkg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1677497977182?e=1736985600&v=beta&t=1GwkALvLWQuHBEuSYRsWcPOek0alKJyHRiVeVMzOEsw",
+    link: "https://www.linkedin.com/in/aybarsayan/",
   },
   {
     name: "Alper Bayram",
     title: "Software Developer",
+    image:
+      "https://media.licdn.com/dms/image/v2/C4D03AQEC6UjpquvKKg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1606166168321?e=1736985600&v=beta&t=dWZPySll1hO1U7YdDzvlJNzGiDxXCa6O3tDAU3yYeU8",
+    link: "https://www.linkedin.com/in/alper-bayram/",
   },
   {
     name: "Burak Akça",
     title: "Software Developer",
+    image:
+      "https://media.licdn.com/dms/image/v2/D4D03AQFnwPVpruIlVg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1703012385201?e=1736985600&v=beta&t=QDZCHpwgrvNWYEeLMo9D1nrr1VvEFBAH8ryIRdGY_NU",
+    link: "https://www.linkedin.com/in/lburakakca/",
   },
   {
-    name: "Kaan",
+    name: "Kaan Beşe",
     title: "Software Developer",
+    image:
+      "https://media.licdn.com/dms/image/v2/D4D35AQFp5wazUYkvrA/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1709689810214?e=1732197600&v=beta&t=BJwYCDhfKFGQTNdHJZ0MKSQraiuyGeHWRjsdoMorw2E",
+    link: "https://www.linkedin.com/in/kaan-be%C5%9Fe-40a67a246/",
   },
   {
-    name: "Kemal Barış",
+    name: "Kemal Barış Honamlıoğlu",
     title: "Software Developer",
-  },
-  {
-    name: "Kemal Barış",
-    title: "Software Developer",
+    image:
+      "https://media.licdn.com/dms/image/v2/D4D03AQHK0esYjdwAIA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1694845100247?e=1736985600&v=beta&t=y6oY4f8KcISe_gHmBcMFAQHUAVIp1io6S40Efx3SIWQ",
+    link: "https://www.linkedin.com/in/bar%C4%B1%C5%9Fhonaml%C4%B1o%C4%9Flu/",
   },
 ];
 export default function Team() {
   return (
-    <div className="flex flex-col justify-center lg:flex-row p-8 pb-20 gap-16 sm:p-18 mx-auto max-w-7xl pt-20">
-      <div className="grid grid-cols-1 gap-y-8 items-center lg:items-center lg:gap-x-16">
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+    <section className="bg-white dark:bg-gray-900">
+      <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
+        <div className="mx-auto mb-8 max-w-screen-sm lg:mb-16">
+          <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+            Our team
+          </h2>
+        </div>
+        <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 ">
           {teams.map((team) => {
             return (
-              <a
-                className="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
-                href="#"
-              >
-                <span className="inline-block rounded-lg bg-gray-50 p-3">
-                  <svg
-                    className="size-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
+              <div className="text-center text-gray-500 dark:text-gray-400">
+                <img
+                  className="mx-auto mb-4 w-36 h-36 rounded-full"
+                  src={team.image}
+                  alt="Bonnie Avatar"
+                />
+                <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  <a href="#">{team.name}</a>
+                </h3>
+                <p>{team.title}</p>
+                <ul className="flex justify-center mt-4 space-x-4">
+                  <a
+                    href={team.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="h-8 w-28 hover:fill-white hover:text-white rounded-full hover:bg-[#0077B5] flex justify-center items-center space-x-2"
                   >
-                    <path d="M12 14l9-5-9-5-9 5 9 5z"></path>
-                    <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path>
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"
-                    ></path>
-                  </svg>
-                </span>
-
-                <h2 className="mt-2 font-bold text-gray-900">{team.name}</h2>
-
-                <p className="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
-                  Lorem ipsum dolor sit amet consectetur.
-                </p>
-              </a>
+                    <span className="grid content-center">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        x="0px"
+                        y="0px"
+                        className="h-5 w-5"
+                        width="50"
+                        height="50"
+                        viewBox="0 0 50 50"
+                      >
+                        <path d="M 8 3.0117188 C 6.3126093 3.0117188 4.8354789 3.4916328 3.7539062 4.3652344 C 2.6723337 5.238836 2.0117188 6.533218 2.0117188 7.9472656 C 2.0117188 10.690836 4.4687078 12.814467 7.7167969 12.941406 A 0.98809878 0.98809878 0 0 0 8 12.988281 C 9.753566 12.988281 11.246191 12.474267 12.3125 11.564453 C 13.378809 10.654639 13.988281 9.3429353 13.988281 7.9472656 A 0.98809878 0.98809878 0 0 0 13.986328 7.8925781 C 13.832307 5.1316834 11.374781 3.0117187 8 3.0117188 z M 8 4.9882812 C 10.60907 4.9882812 11.895883 6.2693448 12.005859 7.9726562 C 11.998759 8.8049335 11.676559 9.5118991 11.03125 10.0625 C 10.378809 10.619186 9.371434 11.011719 8 11.011719 C 5.3980542 11.011719 3.9882813 9.5991704 3.9882812 7.9472656 C 3.9882812 7.1213132 4.3276663 6.4422421 4.9960938 5.9023438 C 5.6645211 5.3624454 6.6873907 4.9882813 8 4.9882812 z M 3 15 A 1.0001 1.0001 0 0 0 2 16 L 2 45 A 1.0001 1.0001 0 0 0 3 46 L 13 46 A 1.0001 1.0001 0 0 0 14 45 L 14 35.664062 L 14 16 A 1.0001 1.0001 0 0 0 13 15 L 3 15 z M 18 15 A 1.0001 1.0001 0 0 0 17 16 L 17 45 A 1.0001 1.0001 0 0 0 18 46 L 28 46 A 1.0001 1.0001 0 0 0 29 45 L 29 29 L 29 28.75 L 29 28.5 C 29 26.555577 30.555577 25 32.5 25 C 34.444423 25 36 26.555577 36 28.5 L 36 45 A 1.0001 1.0001 0 0 0 37 46 L 47 46 A 1.0001 1.0001 0 0 0 48 45 L 48 28 C 48 23.873476 46.787888 20.604454 44.744141 18.375 C 42.700394 16.145546 39.849212 15 36.787109 15 C 32.882872 15 30.521631 16.426076 29 17.601562 L 29 16 A 1.0001 1.0001 0 0 0 28 15 L 18 15 z M 4 17 L 12 17 L 12 35.664062 L 12 44 L 4 44 L 4 17 z M 19 17 L 27 17 L 27 19.638672 A 1.0001 1.0001 0 0 0 28.744141 20.306641 C 28.744141 20.306641 31.709841 17 36.787109 17 C 39.360007 17 41.615528 17.922268 43.269531 19.726562 C 44.923534 21.530858 46 24.261524 46 28 L 46 44 L 38 44 L 38 28.5 A 1.0001 1.0001 0 0 0 37.916016 28.089844 C 37.694061 25.26411 35.38033 23 32.5 23 C 29.474423 23 27 25.474423 27 28.5 L 27 28.75 L 27 29 L 27 44 L 19 44 L 19 17 z"></path>
+                      </svg>
+                    </span>
+                  </a>
+                </ul>
+              </div>
             );
           })}
         </div>
       </div>
-    </div>
+    </section>
   );
 }
