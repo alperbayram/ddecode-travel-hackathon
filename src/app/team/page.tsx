@@ -39,23 +39,23 @@ const teams = [
 ];
 export default function Team() {
   return (
-    <section className="bg-white dark:bg-gray-900">
+    <section className="bg-transparent ">
       <div className="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-6">
         <div className="mx-auto mb-8 max-w-screen-sm lg:mb-16">
-          <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">
+          <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 ">
             Our team
           </h2>
         </div>
         <div className="grid gap-8 lg:gap-16 sm:grid-cols-2 md:grid-cols-3 ">
           {teams.map((team) => {
             return (
-              <div className="text-center text-gray-500 dark:text-gray-400">
+              <div className="text-center text-gray-500 ">
                 <img
                   className="mx-auto mb-4 w-36 h-36 rounded-full"
                   src={team.image}
                   alt="Bonnie Avatar"
                 />
-                <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                <h3 className="mb-1 text-2xl font-bold tracking-tight text-gray-900 ">
                   <a href="#">{team.name}</a>
                 </h3>
                 <p>{team.title}</p>
