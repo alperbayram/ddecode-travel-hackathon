@@ -42,7 +42,7 @@ export default function SectionComponent() {
           How to create a Metamask Wallet for TIV .
         </p>
         <p className="mt-6 text-lg/8 text-gray-600">
-          Quis tellus eget adipiscing convallis sit sit eget aliquet quis.
+          Quis tellus eget adipiscing con.
           
           
         </p>
