@@ -130,15 +130,17 @@ const CONTRACT_ABI = [
 ];
 
 interface SubmitTransactionProps {
-  jsonData: any; // JSON verisi prop olarak gelecek
+  jsonData: any;
   isConnected: boolean;
-  onTransactionComplete: () => void; // Callback for notifying transaction completion
+  onTransactionComplete: () => void;
+  onHashGenerated: (hash: string) => void; // New prop for passing the hash back
 }
 
 const SubmitTransaction: React.FC<SubmitTransactionProps> = ({
   jsonData,
   isConnected,
   onTransactionComplete,
+  onHashGenerated, // New prop
 }) => {
   const [status, setStatus] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
@@ -153,34 +155,23 @@ const SubmitTransaction: React.FC<SubmitTransactionProps> = ({
       setIsLoading(true);
       setStatus("Processing...");
 
-      // JSON verisini string'e çevir
       const jsonString = JSON.stringify(jsonData);
-
-      // SHA256 hash'ini al
       const hash = SHA256(jsonString).toString();
+      console.log("Hash:", hash);
+      // Trigger onHashGenerated callback with the generated hash
+      onHashGenerated(hash);
 
-      // Provider ve signer'ı al
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
+      const contract = new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);
 
-      // Kontrat instance'ını oluştur
-      const contract = new ethers.Contract(
-        CONTRACT_ADDRESS,
-        CONTRACT_ABI,
-        signer
-      );
-
-      // Kontrat fonksiyonunu çağır
       const tx = await contract.storeHash(hash);
 
       setStatus("Waiting for confirmation...");
-
-      // Transaction'ın tamamlanmasını bekle
       const receipt = await tx.wait();
 
       setStatus(`Success! Transaction: ${receipt.hash.slice(0, 10)}...`);
 
-      // Trigger onTransactionComplete callback to notify parent
       onTransactionComplete();
     } catch (error) {
       console.error("Transaction error:", error);

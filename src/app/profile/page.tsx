@@ -22,6 +22,7 @@ export default function Profile() {
   const [newValue, setNewValue] = useState<string>(""); 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedAttributes, setSelectedAttributes] = useState<any[]>([]);
+  const [hash, setHash] = useState<string>(""); // Initialize hash as an empty string
 
   // Predefined options for the "key" field
   const keyOptions = [
@@ -74,7 +75,7 @@ export default function Profile() {
       });
       setNewKey("");
       setNewValue("");
-      setFilteredOptions(keyOptions); // Reset suggestions
+      setFilteredOptions(keyOptions);
     }
   };
 
@@ -87,25 +88,20 @@ export default function Profile() {
   };
 
   const handleTransactionComplete = () => {
-    // Retrieve any existing saved attributes from cookies, defaulting to an empty array if none are found
     const existingSavedAttributes: IResponse[] = Cookies.get("savedAttributes")
       ? JSON.parse(Cookies.get("savedAttributes") || "[]")
       : [];
   
-    // Merge existing saved attributes with new ones, removing duplicates based on the key
     const updatedSavedAttributes = [...existingSavedAttributes, ...attributes].reduce((acc: IResponse[], current: IResponse) => {
-      // Avoid duplicates based on the key
       if (!acc.find((item: IResponse) => item.key === current.key)) {
         acc.push(current);
       }
       return acc;
-    }, [] as IResponse[]); // Type assertion to define acc as IResponse[]
+    }, [] as IResponse[]);
   
-    // Save the merged attributes to cookies and update the state
     setSavedAttributes(updatedSavedAttributes);
     Cookies.set("savedAttributes", JSON.stringify(updatedSavedAttributes), { expires: 7 });
   
-    // Clear the attributes after saving
     setAttributes([]);
     Cookies.remove("attributes");
   };
@@ -116,20 +112,25 @@ export default function Profile() {
     }
   };
 
+  // Combine attributes and savedAttributes into jsonData with string conversion
   const jsonData = {
-    name: "Test Data",
+    attributes: [...attributes, ...savedAttributes].reduce((acc, { key, value }) => {
+      acc[String(key)] = String(value);
+      return acc;
+    }, {} as Record<string, string>),
     timestamp: new Date().toISOString(),
   };
 
   const generateQRCodeData = () => {
-    const selectedData = selectedAttributes.reduce(
-      (acc: any, attribute: any) => {
-        acc[attribute.key] = attribute.value;
-        return acc;
-      },
-      {} as Record<string, string>
-    );
-    return JSON.stringify(selectedData);
+    const selectedData = selectedAttributes.reduce((acc: any, attribute: any) => {
+      acc[attribute.key] = attribute.value;
+      return acc;
+    }, {} as Record<string, string>);
+    return JSON.stringify({
+      walletAddress: walletId,
+      hash,
+      selectedAttributes: selectedData,
+    });
   };
 
   const handleToggleAttribute = (attribute: any) => {
@@ -165,12 +166,12 @@ export default function Profile() {
               {walletId ? walletId : "Wallet ID"}
             </span>
           </p>
-          <p className="text-gray-600 mt-6 text-base/7">description</p>
 
           <SubmitTransaction
             jsonData={jsonData}
             isConnected={isConnected}
             onTransactionComplete={handleTransactionComplete}
+            onHashGenerated={(generatedHash) => setHash(generatedHash)} // Receive and store hash
           />
           <button
             onClick={() => setIsModalOpen(true)}
