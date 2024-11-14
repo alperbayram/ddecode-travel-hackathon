@@ -1,4 +1,9 @@
-import { BriefcaseIcon, GlobeAltIcon, HeartIcon, ScaleIcon } from "@heroicons/react/24/outline";
+import {
+  BriefcaseIcon,
+  GlobeAltIcon,
+  HeartIcon,
+  ScaleIcon,
+} from "@heroicons/react/24/outline";
 
 const aboutFeatures = [
   {
@@ -31,14 +36,13 @@ export default function SectionAboutComponent() {
   return (
     <div className="bg-transparent py-8 sm:py-8 mx-auto max-w-7xl px-6 lg:px-8 h-full">
       <div className="mx-auto max-w-2xl lg:text-center">
-        <h2 className="text-base/7 font-semibold text-indigo-600">
-          About Us
-        </h2>
+        <h2 className="text-base/7 font-semibold text-[#9333ea] ">About Us</h2>
         <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl lg:text-balance">
           Who We Are and What We Stand For
         </p>
         <p className="mt-6 text-lg/8 text-gray-600">
-          Discover our mission, values, and commitment to excellence in delivering top-notch solutions.
+          Discover our mission, values, and commitment to excellence in
+          delivering top-notch solutions.
         </p>
       </div>
       <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
@@ -46,7 +50,7 @@ export default function SectionAboutComponent() {
           {aboutFeatures.map((feature) => (
             <div key={feature.name} className="relative pl-16">
               <dt className="text-base/7 font-semibold text-gray-900">
-                <div className="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-indigo-600">
+                <div className="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-[#9333ea]">
                   <feature.icon
                     aria-hidden="true"
                     className="size-6 text-white"

@@ -158,8 +158,21 @@ export default function Profile() {
     <div className="flex flex-col lg:flex-row p-8 pb-20 gap-16 sm:p-18 mx-auto max-w-7xl">
       {/* Right Section: Wallet */}
       <div className="lg:sticky lg:top-0 lg:w-1/3">
-        <div className="bg-white/60 sm:mx-8 lg:mx-0 rounded-3xl p-8 ring-1 ring-gray-900/10 sm:p-10">
-          <h3 className="text-indigo-600 text-base/7 font-semibold">Wallet</h3>
+        <div
+          className={classNames(
+            "bg-white/60 sm:mx-8 lg:mx-0",
+            "rounded-t-3xl sm:rounded-none lg:rounded-3xl lg:rounded-none",
+            "rounded-3xl p-8 ring-1 ring-gray-900/10 sm:p-10"
+          )}
+        >
+          <h3
+            className={classNames(
+              "text-[#9333ea] ",
+              "text-base/7 font-semibold"
+            )}
+          >
+            Wallet
+          </h3>
           <p className="mt-4 flex items-baseline gap-x-2">
             <span className="text-gray-900 text-sm font-semibold tracking-tight">
               {walletId ? walletId : "Wallet ID"}
@@ -174,7 +187,10 @@ export default function Profile() {
           />
           <button
             onClick={() => setIsModalOpen(true)}
-            className="text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline-indigo-600 w-full mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-10"
+            className={classNames(
+              "text-[#9333ea]  ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline-[#9333ea]  w-full",
+              "mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-10"
+            )}
           >
             Generate QR Code
           </button>
@@ -211,7 +227,7 @@ export default function Profile() {
             />
             <button
               onClick={handleSaveAttribute}
-              className="bg-indigo-600 text-white rounded-md px-4 py-4 font-semibold"
+              className="bg-[#9333ea]  text-white rounded-md px-4 py-4 font-semibold"
             >
               Add
             </button>
@@ -288,16 +304,32 @@ export default function Profile() {
                     <div className="mt-4 space-y-2">
                       {savedAttributes.map((attribute) => (
                         <div key={attribute.key} className="flex items-center">
-                          <input type="checkbox" checked={selectedAttributes.includes(attribute)} onChange={() => handleToggleAttribute(attribute)} className="h-4 w-4 text-indigo-600 border-gray-300 rounded" />
-                          <label className="ml-2 text-gray-700">{attribute.key}: {attribute.value}</label>
+                          <input
+                            type="checkbox"
+                            checked={selectedAttributes.includes(attribute)}
+                            onChange={() => handleToggleAttribute(attribute)}
+                            className="h-4 w-4 text-[#9333ea]  border-gray-300 rounded"
+                          />
+                          <label className="ml-2 text-gray-700">
+                            {attribute.key}: {attribute.value}
+                          </label>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="mt-6 flex justify-between">
-                    <button type="button" className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700" onClick={() => setIsModalOpen(false)}>Close</button>
-                    <button type="button" className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700" onClick={() => setIsModalOpen(false)}>Generate</button>
+                  <div className="mt-6 flex justify-center">
+                    {/* <QRCode value={() => generateQRCodeData()} size={128} /> */}
+                  </div>
+
+                  <div className="mt-4">
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-[#9333ea]  px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+                      onClick={() => setIsModalOpen(false)}
+                    >
+                      Close
+                    </button>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
