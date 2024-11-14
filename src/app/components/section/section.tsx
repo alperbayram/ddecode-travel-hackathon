@@ -52,7 +52,7 @@ export default function SectionComponent() {
           {features.map((feature) => (
             <div key={feature.name} className="relative pl-16">
               <dt className="text-base/7 font-semibold text-gray-900">
-                <div className="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-indigo-600">
+                <div className="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-[#9333ea]">
                   <feature.icon
                     aria-hidden="true"
                     className="size-6 text-white"
