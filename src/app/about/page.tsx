@@ -8,7 +8,7 @@ export default function About() {
       <div className="bg-white shadow-lg rounded-lg p-8 lg:p-16 flex flex-col lg:flex-row items-start lg:items-center gap-10">
         {/* Left side: Text Content */}
         <div className="w-full lg:w-2/3">
-          <h2 className="text-orange-600 text-lg font-semibold mb-2">
+          <h2 className="text-[#9333ea] text-lg font-semibold mb-2">
             How It Started
           </h2>
           <h1 className="text-gray-900 text-4xl sm:text-5xl font-bold leading-tight mb-6">
@@ -17,10 +17,10 @@ export default function About() {
           <p className="text-gray-600 text-lg">
             Our platform was founded by dedicated individuals with a passion for
             lifelong learning and education. Our vision is to create a digital
-            hub of accessible knowledge for everyone, empowering learners
-            around the globe. With a mission to drive transformative learning,
-            we’ve launched a community of enthusiastic learners and experts,
-            all connected by a shared desire to grow and explore.
+            hub of accessible knowledge for everyone, empowering learners around
+            the globe. With a mission to drive transformative learning, we’ve
+            launched a community of enthusiastic learners and experts, all
+            connected by a shared desire to grow and explore.
           </p>
         </div>
 

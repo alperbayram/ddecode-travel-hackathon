@@ -6,7 +6,7 @@ export default function SectionTwoComponent() {
         <div className="hidden sm:mb-8 sm:flex sm:justify-center">
           <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
             TIV(Travellers identity verification).{" "}
-            <a href="#" className="font-semibold text-[#9333ea] ">
+            <a href="/about" className="font-semibold text-[#9333ea] ">
               <span aria-hidden="true" className="absolute inset-0" />
               Read more <span aria-hidden="true">&rarr;</span>
             </a>
@@ -17,9 +17,10 @@ export default function SectionTwoComponent() {
             Your trusted travel ID.
           </h1>
           <p className="mt-8 text-pretty text-lg font-medium text-gray-500 sm:text-xl/8">
-           To get started with TIV and enjoy seamless, secure identity verification for your travels,
-           we need you to connect your MetaMask Wallet. Here’s how you can easily create and set up your 
-           MetaMask wallet with us:
+            To get started with TIV and enjoy seamless, secure identity
+            verification for your travels, we need you to connect your MetaMask
+            Wallet. Here’s how you can easily create and set up your MetaMask
+            wallet with us:
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <a
@@ -28,7 +29,7 @@ export default function SectionTwoComponent() {
             >
               Get started
             </a>
-            <a href="#" className="text-sm/6 font-semibold text-gray-900">
+            <a href="/about" className="text-sm/6 font-semibold text-gray-900">
               Learn more <span aria-hidden="true">→</span>
             </a>
           </div>

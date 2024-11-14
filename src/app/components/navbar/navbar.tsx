@@ -38,7 +38,7 @@ export default function Navbar() {
         const walletAddress = accounts[0];
         setWalletId(walletAddress);
         Cookies.set("walletAddress", walletAddress, { expires: 7 }); // Save Wallet ID in cookies
-  
+
         // Redirect to profile page after connecting
         window.location.href = "/profile";
       } catch (error) {
@@ -48,7 +48,7 @@ export default function Navbar() {
       // Disconnect: Clear Wallet ID and remove from cookies
       setWalletId("");
       Cookies.remove("walletAddress");
-  
+
       // Redirect to home page after disconnecting
       window.location.href = "/";
     }
@@ -73,6 +73,9 @@ export default function Navbar() {
             </DisclosureButton>
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+            <div className="flex shrink-0 items-center">
+              <h6 className="text-base font-bold text-indigo-600">TIV</h6>
+            </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">
                 {navigation.map((item) => (

@@ -28,28 +28,8 @@ const teams = [
 ];
 export default function Team() {
   return (
-    <div className="flex flex-col lg:flex-row p-8 pb-20 gap-16 sm:p-18 mx-auto max-w-7xl pt-20">
-      <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-2 lg:items-center lg:gap-x-16">
-        <div className="mx-auto max-w-lg text-center lg:mx-0 ltr:lg:text-left rtl:lg:text-right">
-          <h2 className="text-3xl font-bold sm:text-4xl text-gray-900">
-            Find your career path
-          </h2>
-
-          <p className="mt-4 text-gray-600">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut vero
-            aliquid sint distinctio iure ipsum cupiditate? Quis, odit assumenda?
-            Deleniti quasi inventore, libero reiciendis minima aliquid tempora.
-            Obcaecati, autem.
-          </p>
-
-          <a
-            href="#"
-            className="mt-8 inline-block rounded bg-[#9333ea]  px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
-          >
-            Contact
-          </a>
-        </div>
-
+    <div className="flex flex-col justify-center lg:flex-row p-8 pb-20 gap-16 sm:p-18 mx-auto max-w-7xl pt-20">
+      <div className="grid grid-cols-1 gap-y-8 items-center lg:items-center lg:gap-x-16">
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
           {teams.map((team) => {
             return (
