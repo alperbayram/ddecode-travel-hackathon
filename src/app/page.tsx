@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <div className="gap-16 font-[family-name:var(--font-geist-sans)]">
       <SectionTwoComponent />
-      <div className="">
+      <div id="section">
         <SectionComponent />
       </div>
       {/* Wallet ID Gösterimi

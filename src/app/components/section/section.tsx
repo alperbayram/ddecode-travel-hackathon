@@ -37,7 +37,7 @@ export default function SectionComponent() {
       <div className="mx-auto max-w-2xl lg:text-center">
         <h2 className="text-3xl font-semibold text-indigo-600">TIV</h2>
         <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl lg:text-balance">
-          How to create a Metamask Wallet for TIV .
+          How to create a Metamask Wallet for TIV
         </p>
         <div className="w-full lg:w-full grid grid-cols-3 gap-4 mt-10">
           <div className="bg-gray-50 p-6 rounded-lg text-center shadow-sm">
@@ -46,11 +46,11 @@ export default function SectionComponent() {
           </div>
           <div className="bg-gray-50 p-6 rounded-lg text-center shadow-sm">
             <h3 className="text-2xl font-semibold text-gray-900">Step 2</h3>
-            <p className="text-gray-600">Create you MetaMask Wallet</p>
+            <p className="text-gray-600">Create your MetaMask Wallet</p>
           </div>
           <div className="bg-gray-50 p-6 rounded-lg text-center shadow-sm">
             <h3 className="text-2xl font-semibold text-gray-900">Step 3</h3>
-            <p className="text-gray-600">Connect you MetaMask wallet to TIV</p>
+            <p className="text-gray-600">Connect your MetaMask wallet to TIV</p>
           </div>
         </div>
       </div>

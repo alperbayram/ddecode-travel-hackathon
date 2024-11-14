@@ -228,7 +228,7 @@ export default function Profile() {
               onChange={handleKeyChange}
               placeholder="Key"
               onKeyDown={handleKeyDown}
-              className="border rounded-md p-4 w-1/2"
+              className="border rounded-md p-4 w-1/2 text-black"
               list="keyOptionsList"
             />
             <datalist id="keyOptionsList">
@@ -242,7 +242,7 @@ export default function Profile() {
               onChange={(e) => setNewValue(e.target.value)}
               placeholder="Value"
               onKeyDown={handleKeyDown}
-              className="border rounded-md p-4 w-1/2"
+              className="border rounded-md p-4 w-1/2 text-black"
             />
             <button
               onClick={handleSaveAttribute}
