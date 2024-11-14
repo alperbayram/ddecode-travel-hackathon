@@ -19,19 +19,32 @@ export default function Profile() {
   const [walletId, setWalletId] = useState<string>("");
   const [attributes, setAttributes] = useState<IResponse[]>([]);
   const [savedAttributes, setSavedAttributes] = useState<IResponse[]>([]);
-  const [newKey, setNewKey] = useState<string>(""); 
-  const [newValue, setNewValue] = useState<string>(""); 
+  const [newKey, setNewKey] = useState<string>("");
+  const [newValue, setNewValue] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedAttributes, setSelectedAttributes] = useState<any[]>([]);
-  const [hash, setHash] = useState<string>(""); 
+  const [hash, setHash] = useState<string>("");
   const [qrData, setQrData] = useState<string>("");
   const [qrCodeData, setQrCodeData] = useState<string | null>(null);
   // Predefined options for the "key" field
   const keyOptions = [
-    "Name", "Age", "Email", "Address", "Phone", 
-    "Hobbies", "Favorite Food", "Occupation", "Country", 
-    "City", "Language", "Skills", "Education", "Interests", 
-    "Favorite Color", "Birthday"
+    "IdentificationNumber",
+    "Name",
+    "Age",
+    "Email",
+    "Address",
+    "Phone",
+    "Hobbies",
+    "Favorite Food",
+    "Occupation",
+    "Country",
+    "City",
+    "Language",
+    "Skills",
+    "Education",
+    "Interests",
+    "Favorite Color",
+    "Birthday",
   ];
 
   const [filteredOptions, setFilteredOptions] = useState<string[]>(keyOptions);
@@ -81,21 +94,26 @@ export default function Profile() {
     const existingSavedAttributes: IResponse[] = Cookies.get("savedAttributes")
       ? JSON.parse(Cookies.get("savedAttributes") || "[]")
       : [];
-  
-    const updatedSavedAttributes = [...existingSavedAttributes, ...attributes].reduce((acc: IResponse[], current: IResponse) => {
+
+    const updatedSavedAttributes = [
+      ...existingSavedAttributes,
+      ...attributes,
+    ].reduce((acc: IResponse[], current: IResponse) => {
       if (!acc.find((item: IResponse) => item.key === current.key)) {
         acc.push(current);
       }
       return acc;
     }, [] as IResponse[]);
-  
+
     setSavedAttributes(updatedSavedAttributes);
-    Cookies.set("savedAttributes", JSON.stringify(updatedSavedAttributes), { expires: 7 });
-  
+    Cookies.set("savedAttributes", JSON.stringify(updatedSavedAttributes), {
+      expires: 7,
+    });
+
     setAttributes([]);
     Cookies.remove("attributes");
   };
-  
+
   const handleKeyDown = (e: any) => {
     if (e.key === "Enter") {
       handleSaveAttribute();
@@ -103,21 +121,27 @@ export default function Profile() {
   };
 
   const jsonData = {
-    attributes: [...attributes, ...savedAttributes].reduce((acc, { key, value }) => {
-      acc[String(key)] = String(value);
-      return acc;
-    }, {} as Record<string, string>),
+    attributes: [...attributes, ...savedAttributes].reduce(
+      (acc, { key, value }) => {
+        acc[String(key)] = String(value);
+        return acc;
+      },
+      {} as Record<string, string>
+    ),
     timestamp: new Date().toISOString(),
   };
 
   const generateQRCodeData = () => {
-    const selectedData = selectedAttributes.reduce((acc: any, attribute: any) => {
-      acc[attribute.key] = attribute.value;
-      return acc;
-    }, {} as Record<string, string>);
+    const selectedData = selectedAttributes.reduce(
+      (acc: any, attribute: any) => {
+        acc[attribute.key] = attribute.value;
+        return acc;
+      },
+      {} as Record<string, string>
+    );
     return JSON.stringify({
       address: walletId,
-      hash:hash, // include the hash data here
+      hash: hash, // include the hash data here
       selectedAttributes: selectedData,
     });
   };
@@ -135,7 +159,7 @@ export default function Profile() {
     setNewKey(value);
 
     setFilteredOptions(
-      keyOptions.filter(option =>
+      keyOptions.filter((option) =>
         option.toLowerCase().includes(value.toLowerCase())
       )
     );
@@ -159,7 +183,14 @@ export default function Profile() {
             "rounded-3xl p-8 ring-1 ring-gray-900/10 sm:p-10"
           )}
         >
-          <h3 className={classNames("text-[#9333ea]", "text-base/7 font-semibold")}>Wallet</h3>
+          <h3
+            className={classNames(
+              "text-[#9333ea]",
+              "text-base/7 font-semibold"
+            )}
+          >
+            Wallet
+          </h3>
           <p className="mt-4 flex items-baseline gap-x-2">
             <span className="text-gray-900 text-sm font-semibold tracking-tight">
               {walletId ? walletId : "Wallet ID"}
@@ -187,7 +218,9 @@ export default function Profile() {
       {/* Left Section */}
       <div className="flex-1">
         <div className="mb-6">
-          <h2 className="text-lg font-semibold text-gray-700">Add Attribute:</h2>
+          <h2 className="text-lg font-semibold text-gray-700">
+            Add Attribute:
+          </h2>
           <div className="mt-4 mb-4 flex items-center gap-2">
             <input
               type="text"
@@ -282,20 +315,47 @@ export default function Profile() {
 
       {/* QR Code Modal */}
       <Transition appear show={isModalOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={() => setIsModalOpen(false)}>
-          <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0" enterTo="opacity-100" leave="ease-in duration-200" leaveFrom="opacity-100" leaveTo="opacity-0">
+        <Dialog
+          as="div"
+          className="relative z-10"
+          onClose={() => setIsModalOpen(false)}
+        >
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Transition.Child as={Fragment} enter="ease-out duration-300" enterFrom="opacity-0 scale-95" enterTo="opacity-100 scale-100" leave="ease-in duration-200" leaveFrom="opacity-100 scale-100" leaveTo="opacity-0 scale-95">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">Generate QR Code</Dialog.Title>
+                  <Dialog.Title
+                    as="h3"
+                    className="text-lg font-medium leading-6 text-gray-900"
+                  >
+                    Generate QR Code
+                  </Dialog.Title>
 
                   {/* Selection of saved attributes */}
                   <div className="mt-4">
-                    <p className="text-sm text-gray-500">Select attributes to include in the QR code:</p>
+                    <p className="text-sm text-gray-500">
+                      Select attributes to include in the QR code:
+                    </p>
                     <div className="mt-4 space-y-2">
                       {savedAttributes.map((attribute) => (
                         <div key={attribute.key} className="flex items-center">
@@ -334,7 +394,7 @@ export default function Profile() {
                   {/* QR Code Display */}
                   {qrCodeData && (
                     <div className="mt-6 flex justify-center">
-                      <QRCodeSVG value={qrCodeData} size={128} />
+                      <QRCodeSVG value={qrCodeData} size={248} />
                     </div>
                   )}
                 </Dialog.Panel>
