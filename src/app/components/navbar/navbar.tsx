@@ -13,7 +13,7 @@ const navigation = [
   { name: "Team", href: "/team" },
 ];
 
-function classNames(...classes:any) {
+function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
@@ -73,8 +73,8 @@ export default function Navbar() {
                     href={item.href}
                     className={classNames(
                       pathname === item.href
-                        ? "border-b-2 border-indigo-600 text-black font-semibold"
-                        : "text-black hover:bg-gray-400 hover:text-white",
+                        ? "border-b-2 border-[#9333ea]  text-black font-semibold"
+                        : "text-black border-b-2 hover:border-[#9333ea]",
                       "rounded-md px-3 py-2 text-sm font-medium"
                     )}
                   >
@@ -88,7 +88,7 @@ export default function Navbar() {
             {walletId ? (
               <Link
                 href="/profile"
-                className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="inline-flex items-center rounded-md bg-[#9333ea]  px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#9333ea]  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9333ea] "
               >
                 Profile
               </Link>
@@ -98,7 +98,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={connectWallet}
-              className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="inline-flex items-center rounded-md bg-[#9333ea]  px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#9333ea]  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9333ea] "
             >
               {walletId ? "Exit Wallet" : "Connect Wallet"}
             </button>
@@ -115,8 +115,8 @@ export default function Navbar() {
               href={item.href}
               className={classNames(
                 pathname === item.href
-                  ? "border-b-2 border-indigo-600 text-black font-semibold"
-                  : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                  ? "border-b-2 border-[#9333ea]  text-black font-semibold"
+                  : "text-gray-300 border-b-2 hover:border-[#9333ea]  ",
                 "block rounded-md px-3 py-2 text-base font-medium"
               )}
             >

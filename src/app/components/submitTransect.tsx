@@ -197,7 +197,7 @@ const SubmitTransaction: React.FC<SubmitTransactionProps> = ({
         disabled={!isConnected || !jsonData || isLoading}
         className={`${
           isLoading ? "cursor-not-allowed" : "cursor-pointer"
-        } text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline-indigo-600 mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-10 w-full`}
+        } text-[#9333ea]  ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline-[#9333ea]  mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-10 w-full`}
       >
         {isLoading ? "Processing..." : "Store Hash in Blockchain"}
       </button>

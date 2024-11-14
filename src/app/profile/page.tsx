@@ -116,7 +116,7 @@ export default function Profile() {
         >
           <h3
             className={classNames(
-              "text-indigo-600",
+              "text-[#9333ea] ",
               "text-base/7 font-semibold"
             )}
           >
@@ -144,7 +144,7 @@ export default function Profile() {
           <button
             onClick={() => setIsModalOpen(true)}
             className={classNames(
-              "text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline-indigo-600 w-full",
+              "text-[#9333ea]  ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300 focus-visible:outline-[#9333ea]  w-full",
               "mt-8 block rounded-md px-3.5 py-2.5 text-center text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:mt-10"
             )}
           >
@@ -179,7 +179,7 @@ export default function Profile() {
             />
             <button
               onClick={handleSaveAttribute}
-              className="bg-indigo-600 text-white rounded-md px-4 py-4 font-semibold"
+              className="bg-[#9333ea]  text-white rounded-md px-4 py-4 font-semibold"
             >
               Add
             </button>
@@ -286,7 +286,7 @@ export default function Profile() {
                             type="checkbox"
                             checked={selectedAttributes.includes(attribute)}
                             onChange={() => handleToggleAttribute(attribute)}
-                            className="h-4 w-4 text-indigo-600 border-gray-300 rounded"
+                            className="h-4 w-4 text-[#9333ea]  border-gray-300 rounded"
                           />
                           <label className="ml-2 text-gray-700">
                             {attribute.key}: {attribute.value}
@@ -303,7 +303,7 @@ export default function Profile() {
                   <div className="mt-4">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-[#9333ea]  px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
                       onClick={() => setIsModalOpen(false)}
                     >
                       Close

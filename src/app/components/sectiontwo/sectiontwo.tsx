@@ -6,7 +6,7 @@ export default function SectionTwoComponent() {
         <div className="hidden sm:mb-8 sm:flex sm:justify-center">
           <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
             Announcing our next round of funding.{" "}
-            <a href="#" className="font-semibold text-indigo-600">
+            <a href="#" className="font-semibold text-[#9333ea] ">
               <span aria-hidden="true" className="absolute inset-0" />
               Read more <span aria-hidden="true">&rarr;</span>
             </a>
@@ -24,7 +24,7 @@ export default function SectionTwoComponent() {
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <a
               href="#"
-              className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="rounded-md bg-[#9333ea]  px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#9333ea]  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#9333ea] "
             >
               Get started
             </a>
@@ -36,7 +36,7 @@ export default function SectionTwoComponent() {
       </div>
       <div
         aria-hidden="true"
-        className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+        className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)] bg-white"
       >
         <div
           style={{

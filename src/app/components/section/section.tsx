@@ -35,7 +35,7 @@ export default function SectionComponent() {
   return (
     <div className="bg-transparent py-8 sm:py-8 mx-auto max-w-7xl px-6 lg:px-8 h-full">
       <div className="mx-auto max-w-2xl lg:text-center">
-        <h2 className="text-base/7 font-semibold text-indigo-600">
+        <h2 className="text-base/7 font-semibold text-[#9333ea] ">
           Deploy faster
         </h2>
         <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl lg:text-balance">
@@ -52,7 +52,7 @@ export default function SectionComponent() {
           {features.map((feature) => (
             <div key={feature.name} className="relative pl-16">
               <dt className="text-base/7 font-semibold text-gray-900">
-                <div className="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-indigo-600">
+                <div className="absolute left-0 top-0 flex size-10 items-center justify-center rounded-lg bg-[#9333ea]">
                   <feature.icon
                     aria-hidden="true"
                     className="size-6 text-white"
