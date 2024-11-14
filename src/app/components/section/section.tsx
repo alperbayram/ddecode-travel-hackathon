@@ -43,7 +43,7 @@ export default function SectionComponent() {
         </p>
         <p className="mt-6 text-lg/8 text-gray-600">
           Quis tellus eget adipiscing convallis sit sit eget aliquet quis.
-          eget egestas a elementum pulvigiat blandit at.
+          
           
         </p>
       </div>
