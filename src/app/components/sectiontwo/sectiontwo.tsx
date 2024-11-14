@@ -13,7 +13,7 @@ export default function SectionTwoComponent() {
           </div>
         </div>
         <div className="text-center">
-          <h1 className="text-balance text-5xl font-semibold tracking-tight text-gray-900 sm:text-7xl">
+          <h1 className="text-balance text-5xl font-semibold tracking-tight text-[#9333ea] sm:text-7xl">
             TIV
           </h1>
           <h1 className="text-balance text-3xl font-bold tracking-tight text-gray-900 sm:text-7xl">
