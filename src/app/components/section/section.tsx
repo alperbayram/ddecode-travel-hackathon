@@ -7,27 +7,27 @@ import {
 
 const features = [
   {
-    name: "Push to deploy",
+    name: "Secure & Private Identity Verification",
     description:
-      "Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.",
+      "With TIV, you can now use your wallet to verify your identity securely and privately. You can store essential travel information in your wallet (like age, nationality, etc.) and use it to verify specific details without revealing unnecessary personal data.",
     icon: CloudArrowUpIcon,
   },
   {
-    name: "SSL certificates",
+    name: "Get Control of Your Data",
     description:
-      "Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.",
+      "TIV ensures that you are in full control of your personal data and can complete transactions without compromising your privacy.",
     icon: LockClosedIcon,
   },
   {
-    name: "Simple queues",
+    name: "Self-Sovereign Identity (SSI)",
     description:
-      "Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.",
+      "SSI gives you full control over your personal data. Your identity and credentials are stored securely in your digital wallet and can be shared selectively, without disclosing unnecessary details. Blockchain ensures your information is secure, private, and under your control.SSI is built on decentralized technologies such as blockchain. This ensures that no central entity controls or stores your identity, reducing the risk of data breaches or misuse.",
     icon: ArrowPathIcon,
   },
   {
-    name: "Advanced security",
+    name: "Easy Access to Your ID",
     description:
-      "Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.",
+      "With TIV, accessing your verified identity is quick and simple. Your travel information is securely stored in your digital wallet, allowing you to instantly verify your identity whenever needed—whether it's for booking a trip or proving your age—without any hassle. Just a few clicks, and you're ready to go!",
     icon: FingerPrintIcon,
   },
 ];
@@ -35,16 +35,16 @@ export default function SectionComponent() {
   return (
     <div className="bg-transparent py-8 sm:py-8 mx-auto max-w-7xl px-6 lg:px-8 h-full">
       <div className="mx-auto max-w-2xl lg:text-center">
-        <h2 className="text-base/7 font-semibold text-[#9333ea] ">
-          Deploy faster
+        <h2 className="text-base/7 font-semibold text-indigo-600">
+          tiv
         </h2>
         <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl lg:text-balance">
-          Everything you need to deploy your app.
+          How to create a Metamask Wallet for TIV .
         </p>
         <p className="mt-6 text-lg/8 text-gray-600">
           Quis tellus eget adipiscing convallis sit sit eget aliquet quis.
-          Suspendisse eget egestas a elementum pulvinar et feugiat blandit at.
-          In mi viverra elit nunc.
+          
+          
         </p>
       </div>
       <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">

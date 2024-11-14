@@ -178,7 +178,7 @@ const SubmitTransaction: React.FC<SubmitTransactionProps> = ({
       // Transaction'ın tamamlanmasını bekle
       const receipt = await tx.wait();
 
-      setStatus(`Success! Transaction: ${receipt.hash}`);
+      setStatus(`Success! Transaction: ${receipt.hash.slice(0, 10)}...`);
 
       // Trigger onTransactionComplete callback to notify parent
       onTransactionComplete();
