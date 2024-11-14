@@ -9,8 +9,8 @@ export default function Home() {
   const [walletId, setWalletId] = useState<string>("");
 
   useEffect(() => {
-    // Çerezden walletAddress değerini al
-    const savedWalletId = Cookies.get("walletAddress");
+    // Çerezden address değerini al
+    const savedWalletId = Cookies.get("address");
     if (savedWalletId) {
       setWalletId(savedWalletId);
     }

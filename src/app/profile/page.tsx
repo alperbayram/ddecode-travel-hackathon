@@ -37,7 +37,7 @@ export default function Profile() {
   const [filteredOptions, setFilteredOptions] = useState<string[]>(keyOptions);
 
   useEffect(() => {
-    const savedWalletId = Cookies.get("walletAddress");
+    const savedWalletId = Cookies.get("address");
     if (savedWalletId) {
       setWalletId(savedWalletId);
     }
@@ -116,8 +116,8 @@ export default function Profile() {
       return acc;
     }, {} as Record<string, string>);
     return JSON.stringify({
-      walletAddress: walletId,
-      hash, // include the hash data here
+      address: walletId,
+      hash:hash, // include the hash data here
       selectedAttributes: selectedData,
     });
   };
