@@ -22,7 +22,7 @@ export default function Navbar() {
   const pathname = usePathname(); // Get the current path
 
   useEffect(() => {
-    const savedWalletId = Cookies.get("walletAddress");
+    const savedWalletId = Cookies.get("address");
     if (savedWalletId) {
       setWalletId(savedWalletId);
     }
@@ -35,9 +35,9 @@ export default function Navbar() {
         const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
-        const walletAddress = accounts[0];
-        setWalletId(walletAddress);
-        Cookies.set("walletAddress", walletAddress, { expires: 7 }); // Save Wallet ID in cookies
+        const address = accounts[0];
+        setWalletId(address);
+        Cookies.set("address", address, { expires: 7 }); // Save Wallet ID in cookies
 
         // Redirect to profile page after connecting
         window.location.href = "/profile";
@@ -47,7 +47,7 @@ export default function Navbar() {
     } else {
       // Disconnect: Clear Wallet ID and remove from cookies
       setWalletId("");
-      Cookies.remove("walletAddress");
+      Cookies.remove("address");
 
       // Redirect to home page after disconnecting
       window.location.href = "/";
